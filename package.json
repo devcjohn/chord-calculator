@@ -8,7 +8,8 @@
   "scripts": {
     "build": "tsc",
     "test": "jest",
-    "pub": "npm run build && npm run test && npm publish --access public"
+    "check-for-untracked-changes": "git diff-index --quiet HEAD",
+    "pub": "npm run build && npm run check-for-untracked-changes && npm run test && npm publish --access public"
   },
   "license": "ISC",
   "devDependencies": {

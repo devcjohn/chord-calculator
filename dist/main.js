@@ -15,6 +15,7 @@ const enharmonicEquivalents = {
     'F##': 'G',
     'C##': 'D',
     Bbb: 'A',
+    Dbb: 'C',
     'G##': 'A#',
 };
 const validNotes = [...circleOfFifths, ...Object.keys(enharmonicEquivalents)];
@@ -24,9 +25,6 @@ const convert = (note) => {
 };
 /* Capitalize the first letter of a note, e.g. 'c' -> 'C' or 'f#' -> F#' */
 const capitalizeNote = (note) => note.charAt(0).toUpperCase() + note.slice(1);
-// export const getMajorKey = (note1: string, note2: string, note3: string): string => {
-//   return getMajorKeyFromArray([note1, note2, note3])
-// }
 const getMajorKey = (note1, note2, note3) => {
     const uniqueNotes = [...new Set([note1, note2, note3])];
     if (uniqueNotes.length > 3 || uniqueNotes.length < 3) {
