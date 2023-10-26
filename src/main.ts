@@ -13,6 +13,7 @@ const enharmonicEquivalents: { [key: string]: string } = {
   'F##': 'G',
   'C##': 'D',
   Bbb: 'A',
+  Dbb: 'C',
   'G##': 'A#',
 }
 
@@ -25,10 +26,6 @@ const convert = (note: string): string => {
 
 /* Capitalize the first letter of a note, e.g. 'c' -> 'C' or 'f#' -> F#' */
 const capitalizeNote = (note: string) => note.charAt(0).toUpperCase() + note.slice(1)
-
-// export const getMajorKey = (note1: string, note2: string, note3: string): string => {
-//   return getMajorKeyFromArray([note1, note2, note3])
-// }
 
 export const getMajorKey = (note1: string, note2: string, note3: string) => {
   const uniqueNotes = [...new Set([note1, note2, note3])]
