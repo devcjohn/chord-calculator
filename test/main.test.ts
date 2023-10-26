@@ -3,65 +3,60 @@ import { getMajorKey } from '../src/main'
 describe('getMajorKey', () => {
   ;[
     // C Major
-    { input: ['C', 'E', 'G'], expected: 'C' },
-    { input: ['E', 'G', 'C'], expected: 'C' },
-    { input: ['G', 'C', 'E'], expected: 'C' },
-    { input: ['C', 'G', 'E'], expected: 'C' },
-    { input: ['E', 'C', 'G'], expected: 'C' },
-    { input: ['G', 'E', 'C'], expected: 'C' },
+    { input: ['C', 'E', 'G'], expected: { key: 'C', category: 'Major', inversion: 'root' } },
+    { input: ['E', 'G', 'C'], expected: { key: 'C', category: 'Major', inversion: '1st' } },
+    { input: ['G', 'C', 'E'], expected: { key: 'C', category: 'Major', inversion: '2nd' } },
+    { input: ['C', 'G', 'E'], expected: { key: 'C', category: 'Major', inversion: 'root' } },
+    { input: ['E', 'C', 'G'], expected: { key: 'C', category: 'Major', inversion: '1st' } },
+    { input: ['G', 'E', 'C'], expected: { key: 'C', category: 'Major', inversion: '2nd' } },
 
-    // Lower case
-    { input: ['c', 'e', 'g'], expected: 'C' },
-    { input: ['c', 'g', 'e'], expected: 'C' },
+    // // Lower case
+    { input: ['c', 'e', 'g'], expected: { key: 'C', category: 'Major', inversion: 'root' } },
+    { input: ['c', 'g', 'e'], expected: { key: 'C', category: 'Major', inversion: 'root' } },
 
-    // D Major
-    { input: ['D', 'F#', 'A'], expected: 'D' },
-    { input: ['D', 'A', 'F#'], expected: 'D' },
-    { input: ['F#', 'D', 'A'], expected: 'D' },
-    { input: ['F#', 'A', 'D'], expected: 'D' },
-    { input: ['A', 'F#', 'D'], expected: 'D' },
-    { input: ['A', 'D', 'F#'], expected: 'D' },
+    // // D Major
+    { input: ['D', 'F#', 'A'], expected: { key: 'D', category: 'Major', inversion: 'root' } },
+    { input: ['D', 'A', 'F#'], expected: { key: 'D', category: 'Major', inversion: 'root' } },
+    { input: ['F#', 'D', 'A'], expected: { key: 'D', category: 'Major', inversion: '1st' } },
+    { input: ['F#', 'A', 'D'], expected: { key: 'D', category: 'Major', inversion: '1st' } },
+    { input: ['A', 'F#', 'D'], expected: { key: 'D', category: 'Major', inversion: '2nd' } },
+    { input: ['A', 'D', 'F#'], expected: { key: 'D', category: 'Major', inversion: '2nd' } },
 
-    // F Major
-    { input: ['F', 'A', 'C'], expected: 'F' },
-    { input: ['F', 'C', 'A'], expected: 'F' },
-    { input: ['A', 'F', 'C'], expected: 'F' },
-    { input: ['A', 'C', 'F'], expected: 'F' },
-    { input: ['C', 'A', 'F'], expected: 'F' },
-    { input: ['C', 'F', 'A'], expected: 'F' },
+    // // F Major
+    { input: ['F', 'A', 'C'], expected: { key: 'F', category: 'Major', inversion: 'root' } },
+    { input: ['F', 'C', 'A'], expected: { key: 'F', category: 'Major', inversion: 'root' } },
+    { input: ['A', 'F', 'C'], expected: { key: 'F', category: 'Major', inversion: '1st' } },
+    { input: ['A', 'C', 'F'], expected: { key: 'F', category: 'Major', inversion: '1st' } },
+    { input: ['C', 'A', 'F'], expected: { key: 'F', category: 'Major', inversion: '2nd' } },
+    { input: ['C', 'F', 'A'], expected: { key: 'F', category: 'Major', inversion: '2nd' } },
 
-    // C# Major
-    { input: ['C#', 'E#', 'G#'], expected: 'C#' },
-    { input: ['C#', 'F', 'G#'], expected: 'C#' },
-    { input: ['C#', 'G#', 'F'], expected: 'C#' },
-    { input: ['C#', 'G#', 'E#'], expected: 'C#' },
-    { input: ['C#', 'E#', 'G#'], expected: 'C#' },
-    { input: ['C#', 'F', 'G#'], expected: 'C#' },
-    { input: ['C#', 'G#', 'F'], expected: 'C#' },
-    { input: ['C#', 'G#', 'E#'], expected: 'C#' },
+    // // C# Major
+    { input: ['C#', 'E#', 'G#'], expected: { key: 'C#', category: 'Major', inversion: 'root' } },
+    { input: ['C#', 'F', 'G#'], expected: { key: 'C#', category: 'Major', inversion: 'root' } },
+    { input: ['C#', 'G#', 'F'], expected: { key: 'C#', category: 'Major', inversion: 'root' } },
+    { input: ['C#', 'G#', 'E#'], expected: { key: 'C#', category: 'Major', inversion: 'root' } },
+    { input: ['E#', 'G#', 'C#'], expected: { key: 'C#', category: 'Major', inversion: '1st' } },
 
-    // Double sharps
-    { input: ['D#', 'F##', 'A#'], expected: 'D#' },
-    { input: ['F##', 'D#', 'A#'], expected: 'D#' },
-    { input: ['D#', 'F##', 'A#'], expected: 'D#' },
-    { input: ['F##', 'D#', 'A#'], expected: 'D#' },
-    { input: ['A#', 'D#', 'F##'], expected: 'D#' },
-    { input: ['A#', 'C##', 'E#'], expected: 'A#' },
+    // // Double sharps
+    { input: ['D#', 'F##', 'A#'], expected: { key: 'D#', category: 'Major', inversion: 'root' } },
+    { input: ['F##', 'D#', 'A#'], expected: { key: 'D#', category: 'Major', inversion: '1st' } },
+    { input: ['A#', 'D#', 'F##'], expected: { key: 'D#', category: 'Major', inversion: '2nd' } },
+    { input: ['A#', 'C##', 'E#'], expected: { key: 'A#', category: 'Major', inversion: 'root' } },
 
-    // Double flats
-    { input: ['Bbb', 'Dbb', 'F'], expected: 'F' }, // A, C, F = F
+    // // Double flats
+    { input: ['Bbb', 'Dbb', 'F'], expected: { key: 'F', category: 'Major', inversion: '1st' } }, // A, C, F = F
 
-    // Others
-    { input: ['Db', 'Bb', 'Gb'], expected: 'Gb' },
-    { input: ['Eb', 'G', 'Bb'], expected: 'Eb' },
-    { input: ['Gb', 'Bb', 'Db'], expected: 'Gb' },
-    { input: ['F#', 'A#', 'C#'], expected: 'F#' },
-    { input: ['A#', 'D#', 'F##'], expected: 'D#' },
-    { input: ['Bb', 'D', 'F'], expected: 'Bb' },
-    { input: ['Bb', 'F', 'D'], expected: 'Bb' },
-    { input: ['Db', 'F', 'Ab'], expected: 'Db' },
+    // // Others
+    { input: ['Db', 'Bb', 'Gb'], expected: { key: 'Gb', category: 'Major', inversion: '2nd' } },
+    { input: ['Eb', 'G', 'Bb'], expected: { key: 'Eb', category: 'Major', inversion: 'root' } },
+    { input: ['Gb', 'Bb', 'Db'], expected: { key: 'Gb', category: 'Major', inversion: 'root' } },
+    { input: ['F#', 'A#', 'C#'], expected: { key: 'F#', category: 'Major', inversion: 'root' } },
+    { input: ['A#', 'D#', 'F##'], expected: { key: 'D#', category: 'Major', inversion: '2nd' } },
+    { input: ['Bb', 'D', 'F'], expected: { key: 'Bb', category: 'Major', inversion: 'root' } },
+    { input: ['Bb', 'F', 'D'], expected: { key: 'Bb', category: 'Major', inversion: 'root' } },
+    { input: ['Db', 'F', 'Ab'], expected: { key: 'Db', category: 'Major', inversion: 'root' } },
   ].forEach(({ input, expected }) => {
-    it(`should return ${expected} for ${input}`, () => {
+    it(`should  ${expected} for ${input}`, () => {
       const actual = getMajorKey(input[0], input[1], input[2])
       expect(actual).toEqual(expected)
     })

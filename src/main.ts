@@ -27,7 +27,15 @@ const convert = (note: string): string => {
 /* Capitalize the first letter of a note, e.g. 'c' -> 'C' or 'f#' -> F#' */
 const capitalizeNote = (note: string) => note.charAt(0).toUpperCase() + note.slice(1)
 
-export const getMajorKey = (note1: string, note2: string, note3: string) => {
+export const getMajorKey = (
+  note1: string,
+  note2: string,
+  note3: string
+): {
+  key: string
+  category: 'Major'
+  inversion: 'root' | '1st' | '2nd'
+} => {
   const uniqueNotes = [...new Set([note1, note2, note3])]
   if (uniqueNotes.length > 3 || uniqueNotes.length < 3) {
     throw new Error('3 unique notes are required')
@@ -56,28 +64,29 @@ export const getMajorKey = (note1: string, note2: string, note3: string) => {
 
   if (closestSteps1 === 4 && closestSteps2 === 3) {
     //root, 1 3 5
-    return capitalizedNotes[0]
+    return { key: capitalizedNotes[0], category: 'Major', inversion: 'root' }
   }
   if (closestSteps1 === 3 && closestSteps2 === 1) {
     // first inversion, 3 5 1
-    return capitalizedNotes[2]
+    return { key: capitalizedNotes[2], category: 'Major', inversion: '1st' }
   }
   if (closestSteps1 === 1 && closestSteps2 === 4) {
     // second inversion,  5 1 3
-    return capitalizedNotes[1]
+    return { key: capitalizedNotes[1], category: 'Major', inversion: '2nd' }
   }
 
   if (closestSteps1 === 1 && closestSteps2 === 3) {
     //root, 1 5 3
-    return capitalizedNotes[0]
+    return { key: capitalizedNotes[0], category: 'Major', inversion: 'root' }
   }
   if (closestSteps1 === 4 && closestSteps2 === 1) {
     // first inversion, 3 1 5
-    return capitalizedNotes[1]
+    return { key: capitalizedNotes[1], category: 'Major', inversion: '1st' }
   }
   if (closestSteps1 === 3 && closestSteps2 === 4) {
     // second inversion, 5 3 1
-    return capitalizedNotes[2]
+    return { key: capitalizedNotes[2], category: 'Major', inversion: '2nd' }
   }
+
   throw new Error('Major chord not found')
 }
