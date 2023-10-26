@@ -1,4 +1,4 @@
-import { getMajorKey } from '../src/chords'
+import { getMajorKey } from '../src/main'
 
 describe('getMajorKey', () => {
   ;[
